@@ -1,20 +1,22 @@
 
 package info.guardianproject.fakepanicreceiver;
 
-import info.guardianproject.fakepanicreceiver.util.SystemUiHider;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+
+import info.guardianproject.fakepanicreceiver.util.SystemUiHider;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
- * 
+ *
  * @see SystemUiHider
  */
 public class PanicConfigActivity extends Activity {
@@ -53,7 +55,15 @@ public class PanicConfigActivity extends Activity {
         setContentView(R.layout.activity_panic_config);
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = findViewById(R.id.fullscreen_content);
+        final TextView contentView = (TextView) findViewById(R.id.fullscreen_content);
+
+        String action = getIntent().getAction();
+        if (TextUtils.isEmpty(action)) {
+            // TODO this app is initiating the connection to the Panic Button
+            contentView.setText("I'm the decider!");
+        } else {
+            contentView.setText(action);
+        }
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
