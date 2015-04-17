@@ -3,7 +3,7 @@
 
     <string name="app_name">FakePanicReceiver</string>
     <string name="config_button">Config…</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="connect_button">Connect</string>
+    <string name="cancel_button">Cancel</string>
 
 </resources>
