@@ -24,6 +24,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (PanicReceiver.checkForDisconnectIntent(this)) {
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
         choosePanicTriggerButton = (Button) findViewById(R.id.choosePanicTriggerButton);
         choosePanicTriggerButton.setCompoundDrawablePadding(10);

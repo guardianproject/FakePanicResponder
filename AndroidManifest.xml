@@ -19,6 +19,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="info.guardianproject.panic.action.DISCONNECT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".PanicConfigActivity"
@@ -27,7 +32,6 @@
             android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="info.guardianproject.panic.action.CONNECT" />
-                <action android:name="info.guardianproject.panic.action.DISCONNECT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

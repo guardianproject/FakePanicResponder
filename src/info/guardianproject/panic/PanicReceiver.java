@@ -12,6 +12,26 @@ public class PanicReceiver {
 
     public static final String PREF_TRIGGER_PACKAGE_NAME = "panicReceiverTriggerPackageName";
 
+    /**
+     * Checks whether the provided {@link Activity} was started with the action
+     * {@link Panic.ACTION_DISCONNECT}, and if so, processes that {@link Intent}
+     * , removing the sending app as the panic trigger if it is currently
+     * configured to be so.
+     *
+     * @param activity the {@code Activity} to check for the {@code Intent}
+     * @return whether an {@code ACTION_DISCONNECT Intent} was received
+     */
+    public static boolean checkForDisconnectIntent(Activity activity) {
+        boolean result = false;
+        Intent intent = activity.getIntent();
+        if (TextUtils.equals(intent.getAction(), Panic.ACTION_DISCONNECT)) {
+            result = true;
+            if (TextUtils.equals(PanicUtils.getCallingPackageName(activity),
+                    getTriggerPackageName(activity)))
+                setTriggerPackageName(activity, null);
+        }
+        return result;
+    }
 
     /**
      * Get the {@code packageName} of the currently configured panic trigger
