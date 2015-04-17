@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import info.guardianproject.panic.PanicReceiver;
+
 public class PanicConfigActivity extends Activity {
 
     @Override
@@ -30,7 +32,6 @@ public class PanicConfigActivity extends Activity {
             contentView.setText("I'm the decider!");
         } else {
             contentView.setText(action);
-            setResult(Activity.RESULT_OK);
         }
 
         final Button cancelButton = (Button) findViewById(R.id.cancel_button);
@@ -48,7 +49,9 @@ public class PanicConfigActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                PanicConfigActivity.this.setResult(Activity.RESULT_OK, intent);
+                Activity activity = PanicConfigActivity.this;
+                PanicReceiver.setTriggerPackageName(activity);
+                activity.setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });
