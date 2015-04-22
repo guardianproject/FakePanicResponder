@@ -5,8 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class PanicReceiver {
 
@@ -79,5 +85,31 @@ public class PanicReceiver {
             prefs.edit().remove(PREF_TRIGGER_PACKAGE_NAME).apply();
         else
             prefs.edit().putString(PREF_TRIGGER_PACKAGE_NAME, packageName).apply();
+    }
+
+    /**
+     * Get a list of resolved {@link Activity}s that can send panic trigger
+     * {@link Intent}s.
+     */
+    public static List<ResolveInfo> resolveTriggerApps(PackageManager pm) {
+        /*
+         * panic trigger apps respond to ACTION_CONNECT, but only send
+         * ACTION_TRIGGER, so they won't be resolved for ACTION_TRIGGER
+         */
+        List<ResolveInfo> connects = pm.queryIntentActivities(new Intent(Panic.ACTION_CONNECT), 0);
+        if (connects.size() == 0)
+            return connects;
+        ArrayList<ResolveInfo> triggerApps = new ArrayList<ResolveInfo>(connects.size());
+
+        List<ResolveInfo> triggers = pm.queryIntentActivities(new Intent(Panic.ACTION_TRIGGER), 0);
+        HashSet<String> haveTriggers = new HashSet<String>(triggers.size());
+        for (ResolveInfo resInfo : triggers)
+            haveTriggers.add(resInfo.activityInfo.packageName);
+
+        for (ResolveInfo connect : connects)
+            if (!haveTriggers.contains(connect.activityInfo.packageName))
+                triggerApps.add(connect);
+
+        return triggerApps;
     }
 }
