@@ -27,6 +27,7 @@ import info.guardianproject.panic.PanicReceiver;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
+    public static final String TAG = "FakePanicReceiver";
 
     private static final String NONE_NAME = "NONE";
     private TrustedAppEntry NONE;
@@ -127,7 +128,7 @@ public class MainActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 TrustedAppEntry entry = list.get(which);
-                                PanicReceiver.setTriggerPackageName(getBaseContext(),
+                                PanicReceiver.setTriggerPackageName(MainActivity.this,
                                         entry.packageName);
                                 showSelectedApp(entry);
                                 dialog.dismiss();

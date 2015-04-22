@@ -58,33 +58,54 @@ public class PanicReceiver {
      * {@link Activity#startActivityForResult(Intent, int)} or
      * {@link Intent#setPackage(String)}, then this will result in no panic
      * trigger app being active.
+     * <p>
+     * When the user changes the panic app config, then the current app needs to
+     * send {@link Intent}s to the previous app, and the currently configured
+     * app to let them know about the changes. This is done by sending an
+     * {@code ACTION_DISCONNECT Intent} to the previous app, and an
+     * {@code ACTION_CONNECT Intent} to the newly configured app.
      *
      * @param activity the {@link Activity} that received an
      *            {@link Panic.ACTION_CONNECT} {@link Intent}
      */
     public static void setTriggerPackageName(Activity activity) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        String packageName = PanicUtils.getCallingPackageName(activity);
-        if (TextUtils.isEmpty(packageName)) {
-            prefs.edit().remove(PREF_TRIGGER_PACKAGE_NAME).apply();
-        } else {
-            prefs.edit().putString(PREF_TRIGGER_PACKAGE_NAME, packageName).apply();
-        }
+        setTriggerPackageName(activity, PanicUtils.getCallingPackageName(activity));
     }
 
     /**
      * Set the {@code packageName} as the currently configured panic trigger
      * app. Set to {@code null} to have no panic trigger app active.
+     * <p>
+     * When the user changes the panic app config, then the current app needs to
+     * send {@link Intent}s to the previous app, and the currently configured
+     * app to let them know about the changes. This is done by sending an
+     * {@code ACTION_DISCONNECT Intent} to the previous app, and an
+     * {@code ACTION_CONNECT Intent} to the newly configured app.
      *
-     * @param context
+     * @param activity the current {@link Activity}
      * @param packageName the app to set as the panic trigger
      */
-    public static void setTriggerPackageName(Context context, String packageName) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        if (TextUtils.isEmpty(packageName))
+    public static void setTriggerPackageName(Activity activity, String packageName) {
+        final PackageManager pm = activity.getPackageManager();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        String existingPackageName = prefs.getString(PREF_TRIGGER_PACKAGE_NAME, null);
+        if (!TextUtils.isEmpty(existingPackageName)) {
+            Intent intent = new Intent(Panic.ACTION_DISCONNECT);
+            intent.setPackage(existingPackageName);
+            List<ResolveInfo> resInfos = pm.queryIntentActivities(intent, 0);
+            if (resInfos.size() > 0)
+                activity.startActivityForResult(intent, 0);
+        }
+        if (TextUtils.isEmpty(packageName)) {
             prefs.edit().remove(PREF_TRIGGER_PACKAGE_NAME).apply();
-        else
+        } else {
             prefs.edit().putString(PREF_TRIGGER_PACKAGE_NAME, packageName).apply();
+            Intent intent = new Intent(Panic.ACTION_CONNECT);
+            intent.setPackage(packageName);
+            List<ResolveInfo> resInfos = pm.queryIntentActivities(intent, 0);
+            if (resInfos.size() > 0)
+                activity.startActivityForResult(intent, 0);
+        }
     }
 
     /**
