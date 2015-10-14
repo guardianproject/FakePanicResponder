@@ -13,24 +13,26 @@
         android:background="@color/black_overlay"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
-
         <Button
             android:id="@+id/cancel_button"
             style="?metaButtonBarButtonStyle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@android:string/cancel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_launcher"
+            android:gravity="center"
+            android:text="@string/app_name" />
 
         <Button
             android:id="@+id/connect_button"
             style="?metaButtonBarButtonStyle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/connect_button" />
     </LinearLayout>

@@ -3,8 +3,8 @@
 
     <string name="app_name">FakePanicReceiver</string>
     <string name="config_button">Config…</string>
-    <string name="connect_button">Connect</string>
-    <string name="cancel_button">Cancel</string>
+    <string name="connect_button">Done</string>
+    <string name="cancel_button">Back</string>
     <string name="choose_panic_trigger">Choose panic trigger</string>
     <string name="none">None</string>
     <string name="default_">Default</string>
