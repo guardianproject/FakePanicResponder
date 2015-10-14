@@ -8,5 +8,7 @@
     <string name="choose_panic_trigger">Choose panic trigger</string>
     <string name="none">None</string>
     <string name="default_">Default</string>
+    <string name="show_toast">Show Toast</string>
+    <string name="uninstall_this_app">Uninstall This App</string>
 
 </resources>

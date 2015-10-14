@@ -45,10 +45,22 @@
         android:background="@color/black_overlay"
         android:orientation="vertical" >
 
+        <CheckBox
+            android:id="@+id/show_toast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/show_toast" />
+
+        <CheckBox
+            android:id="@+id/uninstall_this_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uninstall_this_app" />
+
         <TextView
             android:id="@+id/fullscreen_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:keepScreenOn="true"
             android:textColor="#33b5e5"
