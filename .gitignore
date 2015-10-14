@@ -7,3 +7,15 @@ default.properties
 local.properties
 proguard.cfg
 proguard-project.txt
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Android Studio
+*.iml
+.idea/
+.gradle/
+build/
