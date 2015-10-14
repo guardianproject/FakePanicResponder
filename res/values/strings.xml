@@ -7,5 +7,6 @@
     <string name="cancel_button">Cancel</string>
     <string name="choose_panic_trigger">Choose panic trigger</string>
     <string name="none">None</string>
+    <string name="default_">Default</string>
 
 </resources>

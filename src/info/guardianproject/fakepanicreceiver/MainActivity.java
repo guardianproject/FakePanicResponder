@@ -4,6 +4,7 @@ package info.guardianproject.fakepanicreceiver;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -30,7 +31,9 @@ public class MainActivity extends Activity {
     public static final String TAG = "FakePanicReceiver";
 
     private static final String NONE_NAME = "NONE";
+    private static final String DEFAULT_NAME = "DEFAULT";
     private TrustedAppEntry NONE;
+    private TrustedAppEntry DEFAULT;
 
     private PackageManager pm;
     private Button choosePanicTriggerButton;
@@ -57,6 +60,8 @@ public class MainActivity extends Activity {
 
         NONE = new TrustedAppEntry(this, NONE_NAME, R.string.none,
                 android.R.drawable.ic_menu_close_clear_cancel, iconSize);
+        DEFAULT = new TrustedAppEntry(this, DEFAULT_NAME, R.string.default_,
+                android.R.drawable.btn_star, iconSize);
 
         setContentView(R.layout.activity_main);
         choosePanicTriggerButton = (Button) findViewById(R.id.choosePanicTriggerButton);
@@ -85,13 +90,13 @@ public class MainActivity extends Activity {
             private ArrayList<TrustedAppEntry> list;
 
             private int getIndexOfProviderList() {
+                Context context = getApplicationContext();
                 for (TrustedAppEntry app : list) {
-                    if (app.packageName.equals(PanicReceiver
-                            .getTriggerPackageName(getApplicationContext()))) {
+                    if (app.packageName.equals(PanicReceiver.getTriggerPackageName(context))) {
                         return list.indexOf(app);
                     }
                 }
-                return 0; // default is NONE
+                return 1; // Default
             }
 
             @Override
@@ -102,6 +107,7 @@ public class MainActivity extends Activity {
 
                 list = new ArrayList<TrustedAppEntry>();
                 list.add(0, NONE);
+                list.add(1, DEFAULT);
 
                 for (ResolveInfo resolveInfo : PanicReceiver.resolveTriggerApps(pm)) {
                     if (resolveInfo.activityInfo == null)
