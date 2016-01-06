@@ -10,7 +10,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public class PanicTriggerActivity extends Activity {
+public class ResponseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
