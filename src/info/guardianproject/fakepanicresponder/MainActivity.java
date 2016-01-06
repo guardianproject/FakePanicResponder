@@ -94,6 +94,7 @@ public class MainActivity extends Activity {
         launchCountTextView.setText(String.valueOf(launchCount));
         prefs.edit().putInt(PREF_LAUNCH_COUNT, launchCount + 1).apply();
 
+        showSelectedApp(PanicResponder.getTriggerPackageName(this));
         choosePanicTriggerButton.setOnClickListener(new OnClickListener() {
 
             private ArrayList<ConnectedAppEntry> list;
@@ -159,6 +160,9 @@ public class MainActivity extends Activity {
     private void showSelectedApp(String packageName) {
         if (TextUtils.equals(packageName, NONE.packageName)) {
             showSelectedApp(NONE);
+        } else if (TextUtils.equals(packageName, DEFAULT.packageName)
+                || TextUtils.isEmpty(packageName)) {
+            showSelectedApp(DEFAULT);
         } else {
             try {
                 PackageInfo pi = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
