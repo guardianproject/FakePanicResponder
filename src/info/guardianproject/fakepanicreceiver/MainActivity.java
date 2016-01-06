@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import info.guardianproject.panic.PanicReceiver;
+import info.guardianproject.panic.PanicResponder;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (PanicReceiver.checkForDisconnectIntent(this)) {
+        if (PanicResponder.checkForDisconnectIntent(this)) {
             finish();
             return;
         }
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        String packageName = PanicReceiver.getTriggerPackageName(this);
+        String packageName = PanicResponder.getTriggerPackageName(this);
         showSelectedApp(packageName);
 
         choosePanicTriggerButton.setOnClickListener(new OnClickListener() {
@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
             private int getIndexOfProviderList() {
                 Context context = getApplicationContext();
                 for (TrustedAppEntry app : list) {
-                    if (app.packageName.equals(PanicReceiver.getTriggerPackageName(context))) {
+                    if (app.packageName.equals(PanicResponder.getTriggerPackageName(context))) {
                         return list.indexOf(app);
                     }
                 }
@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
                 list.add(0, NONE);
                 list.add(1, DEFAULT);
 
-                for (ResolveInfo resolveInfo : PanicReceiver.resolveTriggerApps(pm)) {
+                for (ResolveInfo resolveInfo : PanicResponder.resolveTriggerApps(pm)) {
                     if (resolveInfo.activityInfo == null)
                         continue;
                     list.add(new TrustedAppEntry(pm, resolveInfo.activityInfo, iconSize));
@@ -134,7 +134,7 @@ public class MainActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 TrustedAppEntry entry = list.get(which);
-                                PanicReceiver.setTriggerPackageName(MainActivity.this,
+                                PanicResponder.setTriggerPackageName(MainActivity.this,
                                         entry.packageName);
                                 showSelectedApp(entry);
                                 dialog.dismiss();

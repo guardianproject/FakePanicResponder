@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import info.guardianproject.panic.PanicReceiver;
+import info.guardianproject.panic.PanicResponder;
 
 public class PanicConfigActivity extends Activity {
 
@@ -68,7 +68,7 @@ public class PanicConfigActivity extends Activity {
                         .apply();
 
                 Activity activity = PanicConfigActivity.this;
-                PanicReceiver.setTriggerPackageName(activity);
+                PanicResponder.setTriggerPackageName(activity);
                 activity.setResult(Activity.RESULT_OK, intent);
                 finish();
             }
