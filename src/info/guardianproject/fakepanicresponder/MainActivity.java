@@ -32,8 +32,8 @@ public class MainActivity extends Activity {
 
     private static final String NONE_NAME = "NONE";
     private static final String DEFAULT_NAME = "DEFAULT";
-    private TrustedAppEntry NONE;
-    private TrustedAppEntry DEFAULT;
+    private ConnectedAppEntry NONE;
+    private ConnectedAppEntry DEFAULT;
 
     private PackageManager pm;
     private Button choosePanicTriggerButton;
@@ -58,9 +58,9 @@ public class MainActivity extends Activity {
 
         pm = getPackageManager();
 
-        NONE = new TrustedAppEntry(this, NONE_NAME, R.string.none,
+        NONE = new ConnectedAppEntry(this, NONE_NAME, R.string.none,
                 android.R.drawable.ic_menu_close_clear_cancel, iconSize);
-        DEFAULT = new TrustedAppEntry(this, DEFAULT_NAME, R.string.default_,
+        DEFAULT = new ConnectedAppEntry(this, DEFAULT_NAME, R.string.default_,
                 android.R.drawable.btn_star, iconSize);
 
         setContentView(R.layout.activity_main);
@@ -87,11 +87,11 @@ public class MainActivity extends Activity {
 
         choosePanicTriggerButton.setOnClickListener(new OnClickListener() {
 
-            private ArrayList<TrustedAppEntry> list;
+            private ArrayList<ConnectedAppEntry> list;
 
             private int getIndexOfProviderList() {
                 Context context = getApplicationContext();
-                for (TrustedAppEntry app : list) {
+                for (ConnectedAppEntry app : list) {
                     if (app.packageName.equals(PanicResponder.getTriggerPackageName(context))) {
                         return list.indexOf(app);
                     }
@@ -105,16 +105,16 @@ public class MainActivity extends Activity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(R.string.choose_panic_trigger);
 
-                list = new ArrayList<TrustedAppEntry>();
+                list = new ArrayList<ConnectedAppEntry>();
                 list.add(0, NONE);
                 list.add(1, DEFAULT);
 
                 for (ResolveInfo resolveInfo : PanicResponder.resolveTriggerApps(pm)) {
                     if (resolveInfo.activityInfo == null)
                         continue;
-                    list.add(new TrustedAppEntry(pm, resolveInfo.activityInfo, iconSize));
+                    list.add(new ConnectedAppEntry(pm, resolveInfo.activityInfo, iconSize));
                 }
-                ListAdapter adapter = new ArrayAdapter<TrustedAppEntry>(MainActivity.this,
+                ListAdapter adapter = new ArrayAdapter<ConnectedAppEntry>(MainActivity.this,
                         android.R.layout.select_dialog_singlechoice, android.R.id.text1, list) {
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                TrustedAppEntry entry = list.get(which);
+                                ConnectedAppEntry entry = list.get(which);
                                 PanicResponder.setTriggerPackageName(MainActivity.this,
                                         entry.packageName);
                                 showSelectedApp(entry);
@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
         } else {
             try {
                 PackageInfo pi = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-                showSelectedApp(new TrustedAppEntry(pm, pi.activities[0], iconSize));
+                showSelectedApp(new ConnectedAppEntry(pm, pi.activities[0], iconSize));
             } catch (NameNotFoundException e) {
                 showSelectedApp(NONE);
             }
@@ -161,7 +161,7 @@ public class MainActivity extends Activity {
     }
 
     @SuppressLint("NewApi")
-    private void showSelectedApp(final TrustedAppEntry entry) {
+    private void showSelectedApp(final ConnectedAppEntry entry) {
         choosePanicTriggerButton.setText(entry.simpleName);
         if (Build.VERSION.SDK_INT >= 17)
             choosePanicTriggerButton.setCompoundDrawablesRelative(entry.icon, null, null, null);

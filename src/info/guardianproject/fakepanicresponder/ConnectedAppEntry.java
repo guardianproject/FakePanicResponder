@@ -7,7 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
-public class TrustedAppEntry {
+public class ConnectedAppEntry {
     public final String packageName;
     public final String simpleName;
     public final Drawable icon;
@@ -19,7 +19,7 @@ public class TrustedAppEntry {
      * @param activityInfo
      * @param iconSize the desired size of the app icons
      */
-    public TrustedAppEntry(PackageManager pm, ActivityInfo activityInfo, int iconSize) {
+    public ConnectedAppEntry(PackageManager pm, ActivityInfo activityInfo, int iconSize) {
         this.packageName = activityInfo.packageName;
         this.simpleName = String.valueOf(activityInfo.loadLabel(pm));
         Drawable icon = activityInfo.loadIcon(pm);
@@ -36,7 +36,7 @@ public class TrustedAppEntry {
      * @param iconId the resId of the desired icon
      * @param iconSize the desired size of the icon
      */
-    public TrustedAppEntry(Context context, String fakePackageName, int simpleNameId,
+    public ConnectedAppEntry(Context context, String fakePackageName, int simpleNameId,
             int iconId, int iconSize) {
         this.packageName = fakePackageName;
         this.simpleName = context.getString(simpleNameId);
