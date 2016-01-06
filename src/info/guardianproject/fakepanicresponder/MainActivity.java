@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -14,6 +15,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -83,6 +85,14 @@ public class MainActivity extends Activity {
         super.onResume();
         String packageName = PanicResponder.getTriggerPackageName(this);
         showSelectedApp(packageName);
+
+        final String PREF_LAUNCH_COUNT = "launch_count";
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        int launchCount = prefs.getInt(PREF_LAUNCH_COUNT, 0);
+
+        TextView launchCountTextView = (TextView) findViewById(R.id.launch_count);
+        launchCountTextView.setText(String.valueOf(launchCount));
+        prefs.edit().putInt(PREF_LAUNCH_COUNT, launchCount + 1).apply();
 
         choosePanicTriggerButton.setOnClickListener(new OnClickListener() {
 

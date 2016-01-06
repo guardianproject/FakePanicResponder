@@ -34,4 +34,23 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/launches_since_last_clear" />
+
+        <TextView
+            android:id="@+id/launch_count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:textSize="32sp" />
+    </LinearLayout>
+
 </LinearLayout>
