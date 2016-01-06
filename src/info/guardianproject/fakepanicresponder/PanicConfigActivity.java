@@ -19,6 +19,7 @@ import info.guardianproject.panic.PanicResponder;
 public class PanicConfigActivity extends Activity {
 
     public static final String PREF_LOCK_AND_EXIT = "pref_lock_and_exit";
+    public static final String PREF_CLEAR_APP_DATA = "pref_clear_app_data";
     public static final String PREF_UNINSTALL_THIS_APP = "pref_uninstall_this_app";
 
     @Override
@@ -44,6 +45,8 @@ public class PanicConfigActivity extends Activity {
 
         final CheckBox showToast = (CheckBox) findViewById(R.id.show_toast);
         showToast.setChecked(prefs.getBoolean(PREF_LOCK_AND_EXIT, true));
+        final CheckBox clearAppData = (CheckBox) findViewById(R.id.clear_app_data);
+        clearAppData.setChecked(prefs.getBoolean(PREF_CLEAR_APP_DATA, false));
         final CheckBox uninstallThisApp = (CheckBox) findViewById(R.id.uninstall_this_app);
         uninstallThisApp.setChecked(prefs.getBoolean(PREF_UNINSTALL_THIS_APP, false));
 
@@ -64,6 +67,7 @@ public class PanicConfigActivity extends Activity {
             public void onClick(View v) {
                 prefs.edit()
                         .putBoolean(PREF_LOCK_AND_EXIT, showToast.isChecked())
+                        .putBoolean(PREF_CLEAR_APP_DATA, clearAppData.isChecked())
                         .putBoolean(PREF_UNINSTALL_THIS_APP, uninstallThisApp.isChecked())
                         .apply();
 

@@ -32,6 +32,10 @@ public class ResponseActivity extends Activity {
                 uninstall.setData(Uri.parse("package:" + getPackageName()));
                 startActivity(uninstall);
                 ExitActivity.exitAndRemoveFromRecentApps(this);
+            } else if (prefs.getBoolean(PanicConfigActivity.PREF_CLEAR_APP_DATA, true)) {
+                Log.i(TAG, PanicConfigActivity.PREF_CLEAR_APP_DATA);
+                PanicResponder.deleteAllAppData(this);
+                ExitActivity.exitAndRemoveFromRecentApps(this);
             } else if (prefs.getBoolean(PanicConfigActivity.PREF_LOCK_AND_EXIT, true)) {
                 Log.i(TAG, PanicConfigActivity.PREF_LOCK_AND_EXIT);
                 ExitActivity.exitAndRemoveFromRecentApps(this);

@@ -52,6 +52,12 @@
             android:text="@string/lock_and_exit" />
 
         <CheckBox
+            android:id="@+id/clear_app_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_app_data" />
+
+        <CheckBox
             android:id="@+id/uninstall_this_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

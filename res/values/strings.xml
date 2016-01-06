@@ -9,6 +9,7 @@
     <string name="none">None</string>
     <string name="default_">Default</string>
     <string name="lock_and_exit">Lock and Exit</string>
+    <string name="clear_app_data">Clear all data within the app</string>
     <string name="uninstall_this_app">Uninstall This App</string>
 
 </resources>
