@@ -36,7 +36,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ResponseActivity" >
+        <activity
+            android:name=".ResponseActivity"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
                 <action android:name="info.guardianproject.panic.action.TRIGGER" />
 
