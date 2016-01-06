@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import info.guardianproject.panic.Panic;
 import info.guardianproject.panic.PanicResponder;
 
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
     public static final String TAG = "FakePanicResponder";
 
-    private static final String NONE_NAME = "NONE";
-    private static final String DEFAULT_NAME = "DEFAULT";
     private ConnectedAppEntry NONE;
     private ConnectedAppEntry DEFAULT;
 
@@ -58,9 +57,9 @@ public class MainActivity extends Activity {
 
         pm = getPackageManager();
 
-        NONE = new ConnectedAppEntry(this, NONE_NAME, R.string.none,
+        NONE = new ConnectedAppEntry(this, Panic.PACKAGE_NAME_NONE, R.string.none,
                 android.R.drawable.ic_menu_close_clear_cancel, iconSize);
-        DEFAULT = new ConnectedAppEntry(this, DEFAULT_NAME, R.string.default_,
+        DEFAULT = new ConnectedAppEntry(this, Panic.PACKAGE_NAME_DEFAULT, R.string.default_,
                 android.R.drawable.btn_star, iconSize);
 
         setContentView(R.layout.activity_main);
