@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
         NONE = new ConnectedAppEntry(this, Panic.PACKAGE_NAME_NONE, R.string.none,
                 android.R.drawable.ic_menu_close_clear_cancel, iconSize);
         DEFAULT = new ConnectedAppEntry(this, Panic.PACKAGE_NAME_DEFAULT, R.string.default_,
-                android.R.drawable.btn_star, iconSize);
+                android.R.drawable.btn_default_small, iconSize);
 
         setContentView(R.layout.activity_main);
         choosePanicTriggerButton = (Button) findViewById(R.id.choosePanicTriggerButton);
