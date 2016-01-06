@@ -1,5 +1,5 @@
 
-package info.guardianproject.fakepanicreceiver;
+package info.guardianproject.fakepanicresponder;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

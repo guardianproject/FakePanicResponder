@@ -1,5 +1,5 @@
 
-package info.guardianproject.fakepanicreceiver;
+package info.guardianproject.fakepanicresponder;
 
 import android.content.Context;
 import android.content.Intent;
