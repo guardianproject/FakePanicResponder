@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">FakePanicReceiver</string>
+    <string name="app_name">FakePanicResponder</string>
     <string name="config_button">Config…</string>
     <string name="connect_button">Done</string>
     <string name="cancel_button">Back</string>

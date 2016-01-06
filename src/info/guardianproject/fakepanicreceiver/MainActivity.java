@@ -28,7 +28,7 @@ import info.guardianproject.panic.PanicResponder;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
-    public static final String TAG = "FakePanicReceiver";
+    public static final String TAG = "FakePanicResponder";
 
     private static final String NONE_NAME = "NONE";
     private static final String DEFAULT_NAME = "DEFAULT";

@@ -18,7 +18,7 @@ public class PanicTriggerActivity extends Activity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.getBoolean(PanicConfigActivity.PREF_SHOW_TOAST, true)) {
-            String msg = "FakePanicReceiver got a panic trigger!";
+            String msg = "FakePanicResponder got a panic trigger!";
             Log.i("PanicTriggerActivity", msg);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
