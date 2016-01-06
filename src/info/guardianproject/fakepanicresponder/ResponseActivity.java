@@ -17,10 +17,12 @@ public class ResponseActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (prefs.getBoolean(PanicConfigActivity.PREF_SHOW_TOAST, true)) {
-            String msg = "FakePanicResponder got a panic trigger!";
-            Log.i("PanicTriggerActivity", msg);
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        String msg = "FakePanicResponder got a panic trigger!";
+        Log.i(TAG, msg);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
+        if (prefs.getBoolean(PanicConfigActivity.PREF_LOCK_AND_EXIT, true)) {
+            ExitActivity.exitAndRemoveFromRecentApps(this);
         }
         if (prefs.getBoolean(PanicConfigActivity.PREF_UNINSTALL_THIS_APP, false)) {
             Intent intent = new Intent(Intent.ACTION_DELETE);

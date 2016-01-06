@@ -49,7 +49,7 @@
             android:id="@+id/show_toast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/show_toast" />
+            android:text="@string/lock_and_exit" />
 
         <CheckBox
             android:id="@+id/uninstall_this_app"
